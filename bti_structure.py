@@ -82,8 +82,8 @@ class Unit(Org):
         self.__employees.append(employee)
         return employee
 
-        # def remove(self , emp_id):
-        #     self.
+    # def remove(self , emp_id):
+    #     self.
 
     # def headcounts(self):
     #     return len(self.__employees)
@@ -92,8 +92,12 @@ bti = BTI()
 pune = bti.add(Hub("Pune"))
 digital_car = pune.add(Cluster("Digital Car"))
 driving_ecu = digital_car.add(Unit("Driving ECU Integration" , capacity = 80))
-driving_ecu.add(Employee(1,"revati" ,"Intern" ))
+emp = Employee(1 , "Revati", "intern")
+driving_ecu.add(emp)
+print(emp in driving_ecu._Unit__employees)
 
-emp = Employee()
-emp.show()
+
+# print("driving_ecu is:", driving_ecu, "id:", id(driving_ecu))
+# print("attributes:", driving_ecu.__dict__)
+
 
