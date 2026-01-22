@@ -6,9 +6,9 @@ class Org(ABC):
     def add(self, obj):
         ...
 
-    # @abstractmethod
-    # def remove(self, identifier):
-    #     ...
+    @abstractmethod
+    def remove(self, identifier):
+        ...
     
     # @abstractmethod
     # def headcount(self):
@@ -36,8 +36,8 @@ class BTI(Org):
         self.__hubs[hub.hub_name] = hub
         return hub
 
-    # def remove(self , hub_name):
-    #     self.__hubs.pop(hub_name , None)
+    def remove(self , hub_name):
+        self.__hubs.pop(hub_name , None)
 
     # def headcount(self):
     #     return sum(hub.headcount() for hub in self.__hubs.values())
@@ -51,8 +51,8 @@ class Hub(Org):
         self.__clusters[cluster.cluster_name] = cluster
         return cluster
 
-    # def remove(self ,cluster_name):
-    #     self.__clusters.pop(cluster_name , None)
+    def remove(self ,cluster_name):
+        self.__clusters.pop(cluster_name , None)
 
     # def headcounts(self):
     #     return sum(cluster.headcounts() for cluster in self.__clusters.values())
@@ -66,8 +66,8 @@ class Cluster(Org):
         self.__units[unit.unit_name] = unit
         return unit
 
-    # def remove(self, unit_name):
-    #     self.__units.pop(unit_name , None)
+    def remove(self, unit_name):
+        self.__units.pop(unit_name , None)
 
     # def headcounts(self):
     #     return sum(unit.headcounts() for unit in self.__units.values())
@@ -82,21 +82,38 @@ class Unit(Org):
         self.__employees.append(employee)
         return employee
 
-    # def remove(self , emp_id):
-    #     self.
+    def remove(self , emp_id):
+        self.__employees = [e for e in self.__employees if e.emp_id != emp_id]
 
     # def headcounts(self):
     #     return len(self.__employees)
 
+#removing employee
 bti = BTI()
 pune = bti.add(Hub("Pune"))
 digital_car = pune.add(Cluster("Digital Car"))
 driving_ecu = digital_car.add(Unit("Driving ECU Integration" , capacity = 80))
 emp = Employee(1 , "Revati", "intern")
-driving_ecu.add(emp)
+driving_ecu.remove(emp)
 print(emp in driving_ecu._Unit__employees)
 
 
+# removing hub 
+mumbai = bti.add(Hub("Mumbai"))
+bti.remove("Mumbai")
+print("Mumbai" in bti._BTI__hubs)
+
+
+# removing cluster
+dummy_cluster = pune.add(Cluster("Test"))
+pune.remove("Test")
+print("Test" in pune._Hub__clusters)
+
+
+#removing unit
+dummy_unit = digital_car.add(Unit("Test"))
+digital_car.remove("Test")
+print("Test" in digital_car._Cluster__units)
 # print("driving_ecu is:", driving_ecu, "id:", id(driving_ecu))
 # print("attributes:", driving_ecu.__dict__)
 
