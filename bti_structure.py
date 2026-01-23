@@ -126,7 +126,31 @@ method_tool_product = digital_company.add((Unit("Method , Tools and Product Data
 special_skills = digital_product_engineering.add(Unit("Special Skills"))
 print("Special Skills" in digital_product_engineering._Cluster__units)
 
+#remove
 
+#removing employee
+bti = BTI()
+pune = bti.add(Hub("Pune"))
+digital_car = pune.add(Cluster("Digital Car"))
+driving_ecu = digital_car.add(Unit("Driving ECU Integration" , capacity = 80))
+emp = Employee(1 , "Revati", "intern")
+driving_ecu.remove(emp)
+print(emp in driving_ecu._Unit__employees)
+
+# removing hub 
+mumbai = bti.add(Hub("Mumbai"))
+bti.remove("Mumbai")
+print("Mumbai" in bti._BTI__hubs)
+
+# removing cluster
+dummy_cluster = pune.add(Cluster("Test"))
+pune.remove("Test")
+print("Test" in pune._Hub__clusters)
+
+#removing unit
+dummy_unit = digital_car.add(Unit("Test"))
+digital_car.remove("Test")
+print("Test" in digital_car._Cluster__units)
 
 # print("driving_ecu is:", driving_ecu, "id:", id(driving_ecu))
 # print("attributes:", driving_ecu.__dict__)
