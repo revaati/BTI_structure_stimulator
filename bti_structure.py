@@ -10,9 +10,9 @@ class Org(ABC):
     def remove(self, identifier):
         ...
     
-    # @abstractmethod
-    # def headcount(self):
-    #     ...
+    @abstractmethod
+    def headcount(self):
+        ...
 
     # @abstractmethod
     # def kpi(self):
@@ -39,8 +39,8 @@ class BTI(Org):
     def remove(self , hub_name):
         self.__hubs.pop(hub_name , None)
 
-    # def headcount(self):
-    #     return sum(hub.headcount() for hub in self.__hubs.values())
+    def headcount(self):
+        return sum(hub.headcount() for hub in self.__hubs.values())
 
 class Hub(Org):
     def __init__(self, hub_name:str):
@@ -54,8 +54,8 @@ class Hub(Org):
     def remove(self ,cluster_name):
         self.__clusters.pop(cluster_name , None)
 
-    # def headcounts(self):
-    #     return sum(cluster.headcounts() for cluster in self.__clusters.values())
+    def headcount(self):
+        return sum(cluster.headcount() for cluster in self.__clusters.values())
 
 class Cluster(Org):
     def __init__(self , cluster_name:str):
@@ -69,8 +69,8 @@ class Cluster(Org):
     def remove(self, unit_name):
         self.__units.pop(unit_name , None)
 
-    # def headcounts(self):
-    #     return sum(unit.headcounts() for unit in self.__units.values())
+    def headcount(self):
+        return sum(unit.headcount() for unit in self.__units.values())
 
 class Unit(Org):
     def __init__(self , unit_name:str , capacity= 40):
@@ -85,8 +85,8 @@ class Unit(Org):
     def remove(self , emp_id):
         self.__employees = [e for e in self.__employees if e.emp_id != emp_id]
 
-    # def headcounts(self):
-    #     return len(self.__employees)
+    def headcount(self):
+        return len(self.__employees)
 
 
 #add employee
@@ -151,6 +151,27 @@ print("Test" in pune._Hub__clusters)
 dummy_unit = digital_car.add(Unit("Test"))
 digital_car.remove("Test")
 print("Test" in digital_car._Cluster__units)
+
+
+#headcount
+
+
+e1 = driving_ecu.add(Employee(1 , "Revati", "intern"))
+e2 = driving_ecu.add(Employee(2 , "Aarav", "engineer"))
+
+#headcount of unit
+print("Driving ECU headcount:", driving_ecu.headcount())  
+
+#headcount of cluster
+print("Digital Car headcount:", digital_car.headcount()) 
+
+#headcount of hub
+print("Pune Hub headcount:", pune.headcount()) 
+
+#headcount of BTI
+print("BTI headcount:" , bti.headcount())
+
+
 
 # print("driving_ecu is:", driving_ecu, "id:", id(driving_ecu))
 # print("attributes:", driving_ecu.__dict__)
