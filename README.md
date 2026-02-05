@@ -47,5 +47,3 @@ employee - id , name , email , date ,(methods - )
 hub = name , cluster , count, budget
 
 unit = name , team , count , budget , 
-
-
